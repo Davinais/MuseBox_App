@@ -7,12 +7,46 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Japari MuseBox!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
+
+    <Button
+        android:id="@+id/editpl"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Create/Edit Playlist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <Button
+        android:id="@+id/viewpl"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="View Playlist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editpl" />
+
+    <Button
+        android:id="@+id/sharing"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Share to MuseBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewpl" />
 
 </android.support.constraint.ConstraintLayout>
