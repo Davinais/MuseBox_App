@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MuseBox</string>
+    <string name="title_activity_editlist">Edit Playlist</string>
+    <string name="no_playlist">No Playlist Available!</string>
 </resources>
