@@ -1,7 +1,6 @@
 package com.example.user.musebox;
 
-import
-        android.os.Bundle;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -70,7 +69,6 @@ public class Editlist extends AppCompatActivity
     public void updateEmptyView() {
         if (playLists.isEmpty()) {
             plRecyclerView.setVisibility(View.INVISIBLE);
-
             emptyView.setVisibility(View.VISIBLE);
         }
         else {
