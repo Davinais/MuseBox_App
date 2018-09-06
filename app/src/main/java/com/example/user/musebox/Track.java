@@ -29,4 +29,8 @@ public class Track {
         return artwork_url;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(trackID);
+    }
 }

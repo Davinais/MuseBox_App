@@ -1,6 +1,7 @@
 package com.example.user.musebox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +36,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         vh.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Item " + pos + " is clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, EditTracks.class);
+                intent.putExtra("PLAYLIST_NAME", playlists.get(vh.getAdapterPosition()).getName());
+                context.startActivity(intent);
             }
         });
         vh.itemView.setOnLongClickListener(new View.OnLongClickListener() {
