@@ -11,27 +11,27 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.PlayListViewHolder> {
+public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder> {
 
-    private ArrayList<PlayList> playLists;
+    private ArrayList<Playlist> playlists;
     private Context context;
 
-    public PlayListAdapter(ArrayList<PlayList> playLists) {
-        this.playLists = playLists;
+    public PlaylistAdapter(Context context, ArrayList<Playlist> playlists) {
+        this.context = context;
+        this.playlists = playlists;
     }
 
     @NonNull
     @Override
-    public PlayListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PlaylistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.playlist_item, parent, false);
-        PlayListViewHolder vh = new PlayListViewHolder(v);
-        context = parent.getContext();
+        PlaylistViewHolder vh = new PlaylistViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlayListViewHolder vh, final int pos) {
-        vh.plName.setText(playLists.get(pos).getName());
+    public void onBindViewHolder(@NonNull final PlaylistViewHolder vh, final int pos) {
+        vh.plName.setText(playlists.get(pos).getName());
         vh.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +41,9 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.PlayLi
         vh.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(context, "Item " + pos + " is long clicked", Toast.LENGTH_SHORT).show();
+                int adPos = vh.getAdapterPosition();
+                playlists.remove(adPos);
+                notifyItemRemoved(adPos);
                 return true;
             }
         });
@@ -49,14 +51,14 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.PlayLi
 
     @Override
     public int getItemCount() {
-        return playLists == null ? 0 : playLists.size();
+        return playlists == null ? 0 : playlists.size();
     }
 
-    public static class PlayListViewHolder extends RecyclerView.ViewHolder {
+    public static class PlaylistViewHolder extends RecyclerView.ViewHolder {
 
         TextView plName;
 
-        PlayListViewHolder(View view) {
+        PlaylistViewHolder(View view) {
             super(view);
             plName = view.findViewById(R.id.playlist_name_display);
         }

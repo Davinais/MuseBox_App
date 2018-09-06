@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Editlist">
+    tools:context=".EditPlaylist">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/edit_toolbar"
@@ -16,11 +16,10 @@
         app:popupTheme="@style/Theme.AppCompat.Light" />
 
     <TextView
-        android:id="@+id/emptyPlayList_View"
+        android:id="@+id/emptyList_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/no_playlist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

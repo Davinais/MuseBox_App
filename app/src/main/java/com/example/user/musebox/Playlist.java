@@ -2,11 +2,11 @@ package com.example.user.musebox;
 
 import java.util.ArrayList;
 
-public class PlayList {
+public class Playlist {
     private String name;
     private ArrayList<Track> tracks;
 
-    public PlayList(String name) {
+    public Playlist(String name) {
         this.name = name;
     }
 

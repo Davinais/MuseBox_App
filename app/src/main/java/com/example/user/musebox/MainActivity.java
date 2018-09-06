@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterEdit(View view) {
-        Intent intent = new Intent(this, Editlist.class);
+        Intent intent = new Intent(this, EditPlaylist.class);
         startActivity(intent);
     }
 }

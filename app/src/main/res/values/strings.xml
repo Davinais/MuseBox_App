@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MuseBox</string>
-    <string name="title_activity_editlist">Edit Playlist</string>
+    <string name="title_activity_edit_playlist">Edit Playlist</string>
     <string name="no_playlist">No Playlist Available!</string>
+    <string name="no_track">No Track Available!</string>
     <string name="create_button">Create</string>
     <string name="cancel_button">Cancel</string>
     <string name="create_playlist">Create Playlist</string>

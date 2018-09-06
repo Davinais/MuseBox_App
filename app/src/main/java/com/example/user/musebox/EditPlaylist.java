@@ -30,14 +30,14 @@ import android.content.Context;
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
 
-public class Editlist extends AppCompatActivity
-                      implements AddPlaylistDialogFragment.AddPlaylistDialogListener {
+public class EditPlaylist extends AppCompatActivity
+                          implements AddPlaylistDialogFragment.AddPlaylistDialogListener {
 
     private RequestQueue mQueue;
     private static String sc_api_url = "https://api.soundcloud.com";
     private static String sc_client_id = "rZY6FYrMpGVhVDfaKEHdCaY8ALekxd8P";
-    private ArrayList<PlayList> playLists;
-    private PlayListAdapter plAdapter;
+    private ArrayList<Playlist> playlists;
+    private PlaylistAdapter plAdapter;
     private RecyclerView plRecyclerView;
     private TextView emptyView;
 
@@ -51,10 +51,11 @@ public class Editlist extends AppCompatActivity
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        playLists = new ArrayList<>();
-        plAdapter = new PlayListAdapter(playLists);
+        playlists = new ArrayList<>();
+        plAdapter = new PlaylistAdapter(getBaseContext(), playlists);
         plRecyclerView = findViewById(R.id.playlist_view);
-        emptyView = findViewById(R.id.emptyPlayList_View);
+        emptyView = findViewById(R.id.emptyList_View);
+        emptyView.setText(R.string.no_playlist);
         LinearLayoutManager plLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), VERTICAL);
         plRecyclerView.addItemDecoration(decoration);
@@ -67,7 +68,7 @@ public class Editlist extends AppCompatActivity
     }
 
     public void updateEmptyView() {
-        if (playLists.isEmpty()) {
+        if (playlists.isEmpty()) {
             plRecyclerView.setVisibility(View.INVISIBLE);
             emptyView.setVisibility(View.VISIBLE);
         }
@@ -86,9 +87,9 @@ public class Editlist extends AppCompatActivity
     @Override
     public void onCreateButtonClick(DialogFragment dialog) {
         EditText plName = dialog.getDialog().findViewById(R.id.playlistname_enter);
-        playLists.add(new PlayList(plName.getText().toString()));
+        playlists.add(new Playlist(plName.getText().toString()));
         updateEmptyView();
-        plAdapter.notifyDataSetChanged();
+        plAdapter.notifyItemInserted(playlists.size() - 1);
     }
 
     public void resolveTrack(View view) {
