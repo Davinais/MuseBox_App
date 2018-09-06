@@ -1,8 +1,10 @@
 package com.example.user.musebox;
 
-import android.os.Bundle;
+import
+        android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +26,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import android.content.Context;
+
+import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
+
 
 public class Editlist extends AppCompatActivity
                       implements AddPlaylistDialogFragment.AddPlaylistDialogListener {
@@ -51,6 +57,8 @@ public class Editlist extends AppCompatActivity
         plRecyclerView = findViewById(R.id.playlist_view);
         emptyView = findViewById(R.id.emptyPlayList_View);
         LinearLayoutManager plLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), VERTICAL);
+        plRecyclerView.addItemDecoration(decoration);
         plRecyclerView.setLayoutManager(plLayoutManager);
         plRecyclerView.setAdapter(plAdapter);
 
@@ -62,6 +70,7 @@ public class Editlist extends AppCompatActivity
     public void updateEmptyView() {
         if (playLists.isEmpty()) {
             plRecyclerView.setVisibility(View.INVISIBLE);
+
             emptyView.setVisibility(View.VISIBLE);
         }
         else {
