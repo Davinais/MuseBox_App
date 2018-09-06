@@ -1,4 +1,4 @@
-package com.example.user.musebox;
+package org.japari.park.musebox;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

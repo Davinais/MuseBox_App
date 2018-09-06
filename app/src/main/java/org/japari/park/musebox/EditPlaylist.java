@@ -1,4 +1,4 @@
-package com.example.user.musebox;
+package org.japari.park.musebox;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

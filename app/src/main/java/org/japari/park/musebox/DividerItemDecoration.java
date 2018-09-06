@@ -1,4 +1,4 @@
-package com.example.user.musebox;
+package org.japari.park.musebox;
 
 import android.content.Context;
 import android.content.res.TypedArray;

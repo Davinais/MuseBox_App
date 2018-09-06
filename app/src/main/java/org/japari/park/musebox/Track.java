@@ -1,4 +1,4 @@
-package com.example.user.musebox;
+package org.japari.park.musebox;
 
 public class Track {
     private int trackID;

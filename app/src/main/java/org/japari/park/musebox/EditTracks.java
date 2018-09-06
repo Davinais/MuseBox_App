@@ -1,4 +1,4 @@
-package com.example.user.musebox;
+package org.japari.park.musebox;
 
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -112,7 +112,7 @@ public class EditTracks extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
-                Toast.makeText(getBaseContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Error when resolving URL!", Toast.LENGTH_SHORT).show();
             }
         });
 

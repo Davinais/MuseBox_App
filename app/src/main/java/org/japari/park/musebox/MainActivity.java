@@ -1,4 +1,4 @@
-package com.example.user.musebox;
+package org.japari.park.musebox;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
