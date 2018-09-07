@@ -25,18 +25,8 @@ public class AddPlaylistDialogFragment extends DialogFragment {
         builder.setTitle(R.string.create_playlist)
                .setIcon(R.mipmap.ic_launcher)
                .setView(inflater.inflate(R.layout.dialog_addplaylist, null))
-               .setPositiveButton(R.string.create_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mListener.onPositiveClick(AddPlaylistDialogFragment.this);
-                    }
-               })
-               .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        AddPlaylistDialogFragment.this.getDialog().cancel();
-                    }
-               });
+               .setPositiveButton(R.string.create_button, (dialog, which) -> mListener.onPositiveClick(AddPlaylistDialogFragment.this))
+               .setNegativeButton(R.string.cancel_button, (dialog, which) -> AddPlaylistDialogFragment.this.getDialog().cancel());
         return builder.create();
     }
 

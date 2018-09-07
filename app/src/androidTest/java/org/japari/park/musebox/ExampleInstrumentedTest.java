@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.japari.user.musebox", appContext.getPackageName());
+        assertEquals("org.japari.park.musebox", appContext.getPackageName());
     }
 }

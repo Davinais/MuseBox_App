@@ -33,22 +33,16 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     @Override
     public void onBindViewHolder(@NonNull final PlaylistViewHolder vh, final int pos) {
         vh.plName.setText(playlists.get(pos).getName());
-        vh.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, EditTracks.class);
-                intent.putExtra("PLAYLIST_NAME", playlists.get(vh.getAdapterPosition()).getName());
-                context.startActivity(intent);
-            }
+        vh.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, EditTracks.class);
+            intent.putExtra("PLAYLIST_NAME", playlists.get(vh.getAdapterPosition()).getName());
+            context.startActivity(intent);
         });
-        vh.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                int adPos = vh.getAdapterPosition();
-                playlists.remove(adPos);
-                notifyItemRemoved(adPos);
-                return true;
-            }
+        vh.itemView.setOnLongClickListener(v -> {
+            int adPos = vh.getAdapterPosition();
+            playlists.remove(adPos);
+            notifyItemRemoved(adPos);
+            return true;
         });
     }
 

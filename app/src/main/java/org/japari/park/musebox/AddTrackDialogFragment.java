@@ -24,18 +24,8 @@ public class AddTrackDialogFragment extends DialogFragment {
         builder.setTitle(R.string.add_track)
                 .setIcon(R.mipmap.ic_launcher)
                 .setView(inflater.inflate(R.layout.dialog_addtrack, null))
-                .setPositiveButton(R.string.add_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mListener.onPositiveClick(AddTrackDialogFragment.this);
-                    }
-                })
-                .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        AddTrackDialogFragment.this.getDialog().cancel();
-                    }
-                });
+                .setPositiveButton(R.string.add_button, (dialog, which) -> mListener.onPositiveClick(AddTrackDialogFragment.this))
+                .setNegativeButton(R.string.cancel_button, (dialog, which) -> AddTrackDialogFragment.this.getDialog().cancel());
         return builder.create();
     }
 

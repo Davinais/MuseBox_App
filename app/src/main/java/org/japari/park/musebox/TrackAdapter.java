@@ -36,12 +36,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.TrackViewHol
         glide.load(track.getArtwork_url()).into(vh.artwork_view);
         vh.owner_view.setText(track.getOwner());
         vh.title_view.setText(track.getTitle());
-        vh.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vh.itemView.requestFocus();
-            }
-        });
+        vh.itemView.setOnClickListener(v -> vh.itemView.requestFocus());
     }
 
     @Override
