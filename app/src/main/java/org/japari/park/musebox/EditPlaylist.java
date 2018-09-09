@@ -7,12 +7,22 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
@@ -20,6 +30,8 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
 public class EditPlaylist extends AppCompatActivity
                           implements AddPlaylistDialogFragment.AddPlaylistDialogListener {
+
+    private static String plFileName = "Playlists.json";
 
     private ArrayList<Playlist> playlists;
     private PlaylistAdapter plAdapter;
@@ -46,6 +58,20 @@ public class EditPlaylist extends AppCompatActivity
         plRecyclerView.addItemDecoration(decoration);
         plRecyclerView.setLayoutManager(plLayoutManager);
         plRecyclerView.setAdapter(plAdapter);
+        if((new File(getFilesDir(), plFileName)).exists()) {
+            try {
+                FileInputStream inputStream = openFileInput(plFileName);
+                byte[] buf = new byte[inputStream.available()];
+                inputStream.read(buf);
+                inputStream.close();
+                JSONArray plarray = new JSONArray(new String(buf));
+                for (int i = 0; i < plarray.length(); i++)
+                    playlists.add(new Playlist(plarray.getString(i)));
+                plAdapter.notifyDataSetChanged();
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         updateEmptyView();
     }
@@ -80,4 +106,16 @@ public class EditPlaylist extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    protected void onStop() {
+        try {
+            FileOutputStream fo = openFileOutput(plFileName, MODE_PRIVATE);
+            PrintStream p = new PrintStream(fo);
+            p.print(playlists.toString());
+            fo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        super.onStop();
+    }
 }

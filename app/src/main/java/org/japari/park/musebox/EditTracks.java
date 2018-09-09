@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,9 +24,15 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class EditTracks extends AppCompatActivity
@@ -34,6 +41,7 @@ public class EditTracks extends AppCompatActivity
     private RequestQueue mQueue;
     private static String sc_api_url = "https://api.soundcloud.com";
     private static String sc_client_id = "rZY6FYrMpGVhVDfaKEHdCaY8ALekxd8P";
+    private String plName;
     private ArrayList<Track> tracks;
     private TrackAdapter trackAdapter;
     private RecyclerView trackRecyclerView;
@@ -49,7 +57,7 @@ public class EditTracks extends AppCompatActivity
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        String plName = getIntent().getStringExtra("PLAYLIST_NAME");
+        plName = getIntent().getStringExtra("PLAYLIST_NAME");
         setTitle(plName);
 
         RequestManager glide = Glide.with(this);
@@ -61,6 +69,24 @@ public class EditTracks extends AppCompatActivity
         LinearLayoutManager trackLM = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         trackRecyclerView.setLayoutManager(trackLM);
         trackRecyclerView.setAdapter(trackAdapter);
+
+        if((new File(getFilesDir(), plName)).exists()) {
+            try {
+                FileInputStream inputStream = openFileInput(plName);
+                byte[] buf = new byte[inputStream.available()];
+                inputStream.read(buf);
+                inputStream.close();
+                JSONArray trackArray = new JSONArray(new String(buf));
+                for (int i = 0; i < trackArray.length(); i++)
+                {
+                    JSONObject track = trackArray.getJSONObject(i);
+                    tracks.add(new Track(track.getInt("id"), track.getString("title"), track.getString("own"), track.getString("art")));
+                }
+                trackAdapter.notifyDataSetChanged();
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         updateEmptyView();
 
@@ -123,5 +149,18 @@ public class EditTracks extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.edittrack_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onStop() {
+        try {
+            FileOutputStream fo = openFileOutput(plName, MODE_PRIVATE);
+            PrintStream p = new PrintStream(fo);
+            p.print(tracks.toString());
+            fo.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        super.onStop();
     }
 }

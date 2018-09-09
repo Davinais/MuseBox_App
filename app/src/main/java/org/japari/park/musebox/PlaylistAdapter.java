@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder> {
-
     private ArrayList<Playlist> playlists;
     private Context context;
 
@@ -40,7 +40,12 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         });
         vh.itemView.setOnLongClickListener(v -> {
             int adPos = vh.getAdapterPosition();
+            File plFile = new File(context.getFilesDir(), playlists.get(adPos).getName());
             playlists.remove(adPos);
+            if(plFile.exists())
+            {
+                plFile.delete();
+            }
             notifyItemRemoved(adPos);
             return true;
         });

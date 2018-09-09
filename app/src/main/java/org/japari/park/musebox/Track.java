@@ -31,6 +31,6 @@ public class Track {
 
     @Override
     public String toString() {
-        return String.valueOf(trackID);
+        return new StringBuilder().append("{\"id\":").append(String.valueOf(trackID)).append(",\"own\":\"").append(owner).append("\",\"title\":\"").append(title).append("\",\"art\":\"").append(artwork_url).append("\"}").toString();
     }
 }
